@@ -1,0 +1,3 @@
+adafruit-circuitpython-bmp280
+paho-mqtt
+RPi.GPIO
