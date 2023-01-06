@@ -24,7 +24,7 @@ client.publish(f"{topic_prefix}/status", "online", qos=2, retain=True)
 while True:
         client.publish(f"{topic_prefix}/temperature", "{:.2f}".format(bmp280.temperature), qos=0, retain=False)
         client.publish(f"{topic_prefix}/pressure", "{:.2f}".format(bmp280.pressure), qos=0, retain=False)
-        time.sleep(60);
+        time.sleep(20);
 
 client.disconnect()
 client.loop_stop()
