@@ -16,8 +16,10 @@ bmp280 = adafruit_bmp280.Adafruit_BMP280_I2C(board.I2C(), address=0x76)
 
 # MQTT client
 client=mqtt.Client(clientid)
+client.will_set(f"{topic_prefix}/status", "offline", qos=2, retain=True)
 client.connect(broker, port)
 client.loop_start()
+client.publish(f"{topic_prefix}/status", "online", qos=2, retain=True)
 
 while True:
         client.publish(f"{topic_prefix}/temperature", "{:.2f}".format(bmp280.temperature), qos=0, retain=False)
