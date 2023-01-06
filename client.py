@@ -32,7 +32,7 @@ client.publish(status_topic, "online", qos=2, retain=True)
 while True:
         client.publish(f"{bmp280_topic}/temperature", "{:.2f}".format(bmp280.temperature), qos=0, retain=False)
         client.publish(f"{bmp280_topic}/pressure", "{:.2f}".format(bmp280.pressure), qos=0, retain=False)
-        client.publish(f"{pi_topic}/cpu_temperature", get_cpu_temp(), qos=0, retain=False)
+        client.publish(f"{pi_topic}/cpu_temperature", "{:.2f}".format(get_cpu_temp()), qos=0, retain=False)
         time.sleep(20);
 
 client.disconnect()
