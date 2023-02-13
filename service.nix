@@ -18,6 +18,8 @@ in {
         ExecStart = "${piLocalMqttClient}/bin/client";
         Restart = "always";
         RestartSec = "5";
+        DynamicUser = "true";
+        Group="i2c"; # script needs access to i2c interface
     };
     };
   };
