@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import adafruit_bmp280
 import board
@@ -28,12 +28,16 @@ client.will_set(status_topic, "offline", qos=2, retain=True)
 client.connect(broker, port)
 client.loop_start()
 client.publish(status_topic, "online", qos=2, retain=True)
+print(f"MQTT client setup complete, sent online notice on topic {status_topic}")
 
 while True:
-        client.publish(f"{bmp280_topic}/temperature", "{:.2f}".format(bmp280.temperature), qos=0, retain=False)
-        client.publish(f"{bmp280_topic}/pressure", "{:.2f}".format(bmp280.pressure), qos=0, retain=False)
-        client.publish(f"{pi_topic}/cpu_temperature", "{:.2f}".format(get_cpu_temp()), qos=0, retain=False)
-        time.sleep(20);
+        try:
+                client.publish(f"{bmp280_topic}/temperature", "{:.2f}".format(bmp280.temperature), qos=0, retain=False)
+                client.publish(f"{bmp280_topic}/pressure", "{:.2f}".format(bmp280.pressure), qos=0, retain=False)
+                client.publish(f"{pi_topic}/cpu_temperature", "{:.2f}".format(get_cpu_temp()), qos=0, retain=False)
+                time.sleep(20);
+        except Exception as e:
+                print(traceback.format_exc())
 
 client.disconnect()
 client.loop_stop()
