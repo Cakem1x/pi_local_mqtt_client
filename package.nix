@@ -13,7 +13,7 @@ let
       pname = "pi_local_mqtt_client";
       version = "0.0.1";
 
-      src = /home/cakemix/devel/pi_local_mqtt_client;
+      src = ./.;
       requirements = builtins.readFile ./requirements.txt ;
 
       # no tests
