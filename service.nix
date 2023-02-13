@@ -2,7 +2,7 @@
 
 let
   # The package itself. It resolves to the package installation directory.
-  piLocalMqttClient = pkgs.callPackage ./package.nix {};
+  piLocalMqttClient = pkgs.callPackage ./default.nix {};
 
   # An object containing user configuration (in /etc/nixos/configuration.nix)
   cfg = config.services.pi-local-mqtt-client;
