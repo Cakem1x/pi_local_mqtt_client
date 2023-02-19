@@ -4,6 +4,7 @@ import adafruit_bme680
 import board
 import paho.mqtt.client as mqtt
 import time
+import traceback
 
 def get_cpu_temp(cpu_temp_filename="/sys/class/thermal/thermal_zone0/temp"):
         with open(cpu_temp_filename) as cpu_temp_file:
