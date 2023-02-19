@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import adafruit_bmp280
+import adafruit_bme680
 import board
 import paho.mqtt.client as mqtt
 import time
@@ -16,11 +16,11 @@ port = 1883
 client_id = "mqtt_on_pi"
 topic_prefix = "h10/floor1/living_room"
 status_topic = f"{topic_prefix}/{client_id}/status"
-bmp280_topic = f"{topic_prefix}/bmp280"
+bme680_topic = f"{topic_prefix}/bme680"
 pi_topic = f"{topic_prefix}/pi"
 
-# BMP280 sensor
-bmp280 = adafruit_bmp280.Adafruit_BMP280_I2C(board.I2C(), address=0x76)
+# BME680 sensor. To make it be on address 0x76: Connect its SDO pin to GND
+bme680 = adafruit_bme680.Adafruit_BME680_I2C(board.I2C(), address=0x76)
 
 # MQTT client
 client=mqtt.Client(client_id)
@@ -32,8 +32,8 @@ print(f"MQTT client setup complete, sent online notice on topic {status_topic}")
 
 while True:
         try:
-                client.publish(f"{bmp280_topic}/temperature", "{:.2f}".format(bmp280.temperature), qos=0, retain=False)
-                client.publish(f"{bmp280_topic}/pressure", "{:.2f}".format(bmp280.pressure), qos=0, retain=False)
+                client.publish(f"{bme680_topic}/temperature", "{:.2f}".format(bme680.temperature), qos=0, retain=False)
+                client.publish(f"{bme680_topic}/pressure", "{:.2f}".format(bme680.pressure), qos=0, retain=False)
                 client.publish(f"{pi_topic}/cpu_temperature", "{:.2f}".format(get_cpu_temp()), qos=0, retain=False)
                 time.sleep(20);
         except Exception as e:
