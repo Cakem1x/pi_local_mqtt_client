@@ -17,7 +17,7 @@ in {
       serviceConfig = {
         ExecStart = "${piLocalMqttClient}/bin/client";
         Restart = "always";
-        RestartSec = "5";
+        RestartSec = "60";
         DynamicUser = "true";
         Group="i2c"; # script needs access to i2c interface
     };
