@@ -34,6 +34,8 @@ while True:
         try:
                 client.publish(f"{bme680_topic}/temperature", "{:.2f}".format(bme680.temperature), qos=0, retain=False)
                 client.publish(f"{bme680_topic}/pressure", "{:.2f}".format(bme680.pressure), qos=0, retain=False)
+                client.publish(f"{bme680_topic}/relative_humidity", "{:.2f}".format(bme680.relative_humidity), qos=0, retain=False)
+                client.publish(f"{bme680_topic}/gas_resistance", "{:.2f}".format(bme680.gas), qos=0, retain=False)
                 client.publish(f"{pi_topic}/cpu_temperature", "{:.2f}".format(get_cpu_temp()), qos=0, retain=False)
                 time.sleep(20);
         except Exception as e:
