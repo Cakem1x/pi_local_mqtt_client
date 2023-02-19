@@ -1,4 +1,4 @@
-{ nixpkgs ? import <nixpkgs> {}, pythonPkgs ? nixpkgs.pkgs.python37Packages }:
+{ nixpkgs ? import <nixpkgs> {}, pythonPkgs ? nixpkgs.pkgs.python3Packages }:
 
 let
   inherit (nixpkgs) pkgs;
